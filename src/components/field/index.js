@@ -118,6 +118,7 @@ export default class TextField extends PureComponent {
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
     inputContainerStyle: (ViewPropTypes || View.propTypes).style,
+    mask: PropTypes.string,
   };
 
   static inputContainerStyle = styles.inputContainer;
@@ -268,7 +269,7 @@ export default class TextField extends PureComponent {
     let { current: input } = this.inputRef;
 
     if (!disabled && editable) {
-      input.focus();
+      // input.focus();
     }
   }
 
@@ -381,7 +382,7 @@ export default class TextField extends PureComponent {
     }
   }
 
-  onChangeText(text) {
+  onChangeText(text, extracted) {
     let { onChangeText, formatText } = this.props;
 
     if ("function" === typeof formatText) {
@@ -391,7 +392,7 @@ export default class TextField extends PureComponent {
     this.setState({ text });
 
     if ("function" === typeof onChangeText) {
-      onChangeText(text);
+      onChangeText(text, extracted);
     }
   }
 

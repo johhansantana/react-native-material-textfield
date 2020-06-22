@@ -27,7 +27,7 @@ function labelStateFromProps(props, state) {
   let { placeholder, defaultValue } = props;
   let { text, receivedFocus } = state;
 
-  return !!(placeholder || text || (!receivedFocus && defaultValue));
+  return !!(placeholder || text || defaultValue || (!receivedFocus && defaultValue));
 }
 
 function errorStateFromProps(props, state) {
@@ -212,9 +212,9 @@ export default class TextField extends PureComponent {
     let labelState = labelStateFromProps(this.props, this.state);
     let prevLabelState = labelStateFromProps(prevProps, prevState);
 
-    if (labelState ^ prevLabelState) {
-      this.startLabelAnimation();
-    }
+    // if (labelState ^ prevLabelState) {
+    this.startLabelAnimation();
+    // }
   }
 
   startFocusAnimation() {
@@ -620,7 +620,8 @@ export default class TextField extends PureComponent {
           onContentSizeChange={this.onContentSizeChange}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          value={this.value()}
+          value={this.props.value}
+          defaultValue={this.props.defaultValue}
           ref={this.inputRef}
           mask={this.props.mask}
         />

@@ -602,9 +602,12 @@ export default class TextField extends PureComponent {
     return (
       <>
         <TextInputMask
-          // refInput={ref => {
-          //     input = ref;
-          // }}
+          refInput={ref => {
+            this.inputRef = ref;
+            if (typeof this.props.inputRef === 'function') {
+              this.props.inputRef(ref)
+            }
+          }}
           // onChangeText={(formatted, extracted) => {
           //     console.log({ formatted, extracted, input });
           //     props.onChange(formatted, extracted);
